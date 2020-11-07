@@ -14,9 +14,9 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component
 export default class CNavigation extends Vue {
   private navItems = [
-    { id: 0, path: '/', name: 'Home' },
-    { id: 1, path: '/about', name: 'About' },
-    { id: 2, path: '/reservations', name: 'Reservations' }
+    { id: 0, path: '/', name: 'Pocetna' },
+    { id: 1, path: '/about', name: 'O Nama' },
+    { id: 2, path: '/reservations', name: 'Rezervacije' }
   ]
 
   private navToggle = false

@@ -1,6 +1,6 @@
 <template lang="pug">
   .about
-    h1 ABOUT VIEW
+    h1 O NAMA
 
 </template>
 

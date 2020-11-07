@@ -1,6 +1,6 @@
 <template lang="pug">
   .home
-    h1 HOME VIEW
+    h1 POCETNA
 
 </template>
 

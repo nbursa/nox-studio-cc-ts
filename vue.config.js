@@ -5,6 +5,7 @@ module.exports = {
       errors: true
     }
   },
+  publicPath: '',
   pwa: {
     name: 'Nox - Underground Studio',
     themeColor: '#D9DD6C',

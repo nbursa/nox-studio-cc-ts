@@ -1,6 +1,6 @@
 <template lang="pug">
   .reservations
-    h1.page-title Reservations
+    h1.page-title REZERVACIJE
     .date-pickers
       h2 Datum
       nox-date-picker.date-picker(
