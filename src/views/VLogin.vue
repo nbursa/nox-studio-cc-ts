@@ -51,10 +51,13 @@ export default class VLogin extends Vue {
             uid: res.user.uid,
             isAdmin: process.env.VUE_APP_FIREBASE_adminIds.includes(res.user.uid) ? 1 : 0
           }
+          console.log('storrrr: ', this.$store)
           // console.log('user1: ', user, this.$route)
           localStorage.setItem('nox_user', JSON.stringify(user))
           localStorage.setItem('nox_jwt', res.user.refreshToken)
+          this.$store.dispatch('setLoggedIn', true)
           if (user.isAdmin === 1) {
+            this.$store.dispatch('setIsAdmin', true)
             return this.$router.push({ path: '/admin' })
           }
           this.$router.push({ path: '/dashboard' })

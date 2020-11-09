@@ -13,6 +13,7 @@ Vue.config.productionTip = false
 
 Vue.use(Calendar, { componentPrefix: 'nox' })
 Vue.use(firebase)
+Vue.use(store)
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_apiKey,

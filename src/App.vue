@@ -10,23 +10,32 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import CNavigation from '@/components/CNavigation.vue'
+// import { User } from '@/models/user.model'
 
-@Component({
+@Component<App>({
   components: {
     CNavigation
   }
 })
-
-export default class Home extends Vue {
-  // logged = false
+export default class App extends Vue {
+  // isLoggedIn = false
+  // isAdmin = false
 
   mounted () {
-    console.log('app mounted')
+    // console.log('app mounted store: ', this.$store.state)
   }
 
-  // loggedIn (status) {
-  //   console.log('logged in from event ', status)
-  //   this.logged = status
+  // get user () { return JSON.parse(localStorage.getItem('nox_user') || 'null') }
+
+  // @Watch('user', { immediate: true, deep: true })
+  // userChanged (val: User, oldVal: User) {
+  //   console.log('app user changed: ', val, oldVal)
+  //   if (val) {
+  //     this.isLoggedIn = true
+  //     if (val.isAdmin && val.isAdmin === 1) {
+  //       this.isAdmin = true
+  //     }
+  //   }
   // }
 }
 </script>

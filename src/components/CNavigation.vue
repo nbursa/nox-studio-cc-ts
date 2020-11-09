@@ -10,11 +10,8 @@
       router-link.nav-link.logout(v-if="isLoggedIn" @click.native="logOut" to="") LOGOUT
 
     div.result
-      div smallScreen: {{ smallScreen }}
       div isLoggedIn: {{ isLoggedIn }}
-      div user: {{ user }}
       div isAdmin: {{ isAdmin }}
-      //- div admin: {{ admin }}
 
 </template>
 
@@ -22,19 +19,6 @@
 import { Component, Vue } from 'vue-property-decorator'
 import firebase from 'firebase/app'
 
-interface User {
-  email: string;
-  password: string;
-  isAdmin: number;
-}
-
-@Component<CNavigation>({
-  watch: {
-    user (user: User) {
-      console.log('watch user: ', user)
-    }
-  }
-})
 @Component
 export default class CNavigation extends Vue {
   navItems = [
@@ -46,26 +30,20 @@ export default class CNavigation extends Vue {
 
   navToggle = false
 
+  get isLoggedIn () { return this.$store.state.isLoggedIn }
+
+  get isAdmin () { return this.$store.state.isAdmin }
+
   get smallScreen () {
     return window.innerWidth < 550
-  }
-
-  get isLoggedIn () {
-    console.log('isLoggedIn: ', localStorage.getItem('nox_jwt'))
-    return localStorage.getItem('nox_jwt') !== null
-  }
-
-  get user () { return JSON.parse(localStorage.getItem('nox_user') || 'null') }
-
-  get isAdmin () {
-    console.log('user; ', this.user)
-    return this.user ? this.user.isAdmin === 1 : false
   }
 
   logOut () {
     firebase.auth().signOut().then(() => {
       localStorage.removeItem('nox_user')
       localStorage.removeItem('nox_jwt')
+      this.$store.dispatch('setLoggedIn', false)
+      this.$store.dispatch('setIsAdmin', false)
       this.$router.push('/')
     }).catch(function (error) {
       console.log('firebase logout error: ', error)
