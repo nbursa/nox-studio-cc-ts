@@ -5,28 +5,71 @@
     nav
       div.arrow(v-if="!navToggle" @click="toggleNav")
       router-link.nav-link(v-if="navToggle || !smallScreen" v-for="item in navItems" :key="item.id" :to="item.path" @click.native="toggleNav") {{ item.name }}
+      router-link.nav-link.admin(v-if="isAdmin" to="/admin") ADMIN
+      router-link.nav-link.login(v-if="!isLoggedIn" to="/login") LOGIN
+      router-link.nav-link.logout(v-if="isLoggedIn" @click.native="logOut" to="") LOGOUT
+
+    div.result
+      div smallScreen: {{ smallScreen }}
+      div isLoggedIn: {{ isLoggedIn }}
+      div user: {{ user }}
+      div isAdmin: {{ isAdmin }}
+      //- div admin: {{ admin }}
 
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import firebase from 'firebase/app'
 
+interface User {
+  email: string;
+  password: string;
+  isAdmin: number;
+}
+
+@Component<CNavigation>({
+  watch: {
+    user (user: User) {
+      console.log('watch user: ', user)
+    }
+  }
+})
 @Component
 export default class CNavigation extends Vue {
-  private navItems = [
+  navItems = [
     { id: 0, path: '/', name: 'Pocetna' },
     { id: 1, path: '/about', name: 'O Nama' },
-    { id: 2, path: '/reservations', name: 'Rezervacije' }
+    { id: 2, path: '/reservations', name: 'Rezervacije' },
+    { id: 3, path: '/dashboard', name: 'Dashboard' }
   ]
 
-  private navToggle = false
+  navToggle = false
 
   get smallScreen () {
     return window.innerWidth < 550
   }
 
-  mounted () {
-    console.log('nav mounted ', this.navItems)
+  get isLoggedIn () {
+    console.log('isLoggedIn: ', localStorage.getItem('nox_jwt'))
+    return localStorage.getItem('nox_jwt') !== null
+  }
+
+  get user () { return JSON.parse(localStorage.getItem('nox_user') || 'null') }
+
+  get isAdmin () {
+    console.log('user; ', this.user)
+    return this.user ? this.user.isAdmin === 1 : false
+  }
+
+  logOut () {
+    firebase.auth().signOut().then(() => {
+      localStorage.removeItem('nox_user')
+      localStorage.removeItem('nox_jwt')
+      this.$router.push('/')
+    }).catch(function (error) {
+      console.log('firebase logout error: ', error)
+    })
   }
 
   toggleNav () {
@@ -47,6 +90,12 @@ export default class CNavigation extends Vue {
   right 0
   background #000
   color #ffffff
+  .result
+    position absolute
+    top 300px
+    left 0
+    width 100%
+    color red
   .logo
     @media screen and (max-width: 550px)
       margin-bottom 20px

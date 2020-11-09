@@ -1,6 +1,6 @@
 <template lang="pug">
-  .about
-    h1 O NAMA
+  .admin
+    h1 ADMIN PANEL
 
 </template>
 
@@ -8,15 +8,15 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class VAbout extends Vue {
-  // mounted () {
-  //   console.log('about mounted')
-  // }
+export default class VAdmin extends Vue {
+  mounted () {
+    // console.log('admin mounted')
+  }
 }
 </script>
 
 <style lang="stylus">
-  .about
+  .admin
     padding 20px
     text-align initial
 </style>

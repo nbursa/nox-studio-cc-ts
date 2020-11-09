@@ -2,6 +2,8 @@
   #app
     CNavigation
     router-view
+    //- CNavigation(:isLoggedIn="logged")
+    //- router-view(@login-status="loggedIn" :isLoggedIn="logged")
 
 </template>
 
@@ -16,9 +18,16 @@ import CNavigation from '@/components/CNavigation.vue'
 })
 
 export default class Home extends Vue {
+  // logged = false
+
   mounted () {
     console.log('app mounted')
   }
+
+  // loggedIn (status) {
+  //   console.log('logged in from event ', status)
+  //   this.logged = status
+  // }
 }
 </script>
 

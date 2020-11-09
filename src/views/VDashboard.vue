@@ -1,6 +1,6 @@
 <template lang="pug">
-  .about
-    h1 O NAMA
+  .dashboard
+    h1 DASHBOARD
 
 </template>
 
@@ -8,15 +8,15 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class VAbout extends Vue {
-  // mounted () {
-  //   console.log('about mounted')
-  // }
+export default class VDashboard extends Vue {
+  mounted () {
+    // console.log('VDashboard mounted')
+  }
 }
 </script>
 
 <style lang="stylus">
-  .about
+  .dashboard
     padding 20px
     text-align initial
 </style>

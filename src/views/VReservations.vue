@@ -56,9 +56,9 @@ export default class VReservations extends Vue {
     timeAdjust: '12:00'
   }
 
-  mounted () {
-    console.log('reservations mounted')
-  }
+  // mounted () {
+  //   console.log('reservations mounted')
+  // }
 }
 </script>
 
