@@ -99,7 +99,8 @@ export default class VReservations extends Vue {
     this.$refs.calendar.next()
   }
 
-  showEvent ({ nativeEvent, event }) {
+  showEvent ({ nativeEvent, event }: { nativeEvent: MouseEvent; event: object}) {
+    console.log('show event: ', nativeEvent, event)
     const open = () => {
       this.selectedEvent = event
       this.selectedElement = nativeEvent.target
@@ -118,7 +119,7 @@ export default class VReservations extends Vue {
     nativeEvent.stopPropagation()
   }
 
-  updateRange ({ start, end }) {
+  updateRange ({ start, end }: { start: { date: Date }; end: { date: Date } }) {
     const events = []
 
     const min = new Date(`${start.date}T00:00:00`)
@@ -140,6 +141,8 @@ export default class VReservations extends Vue {
         color: this.colors[this.rnd(0, this.colors.length - 1)],
         timed: !allDay
       })
+
+      // this.events = events
     }
 
     this.events = events
