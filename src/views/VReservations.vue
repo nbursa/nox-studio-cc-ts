@@ -33,7 +33,7 @@
                   v-list-item(@click="type = '4day'")
                     v-list-item-title 4 days
           v-sheet(height='600')
-            v-calendar(ref='calendar' v-model='focus' color='primary' :events='events' :event-color='getEventColor' :type='type' @click:event='showEvent' @click:more='viewDay' @click:date='viewDay' @change='updateRange')
+            v-calendar(ref='calendar' v-model='focus' color='primary' :events='events' :event-color='getEventColor' :type='type' @click:event.stop='showEvent' @click:more='viewDay' @click:date='viewDay' @change='updateRange')
             v-menu(v-model='selectedOpen' :close-on-content-click='false' :activator='selectedElement' offset-x='')
               v-card(color='grey lighten-4' min-width='350px' flat='')
                 v-toolbar(:color='selectedEvent.color' dark='')
@@ -99,7 +99,7 @@ export default class VReservations extends Vue {
     this.$refs.calendar.next()
   }
 
-  showEvent ({ nativeEvent, event }: { nativeEvent: MouseEvent; event: object}) {
+  showEvent ({ nativeEvent, event }: { nativeEvent: { target: null }; event: Event}) {
     console.log('show event: ', nativeEvent, event)
     const open = () => {
       this.selectedEvent = event
@@ -116,7 +116,7 @@ export default class VReservations extends Vue {
       open()
     }
 
-    nativeEvent.stopPropagation()
+    (nativeEvent as Event).stopPropagation()
   }
 
   updateRange ({ start, end }: { start: { date: Date }; end: { date: Date } }) {
@@ -141,11 +141,9 @@ export default class VReservations extends Vue {
         color: this.colors[this.rnd(0, this.colors.length - 1)],
         timed: !allDay
       })
-
-      // this.events = events
     }
 
-    this.events = events
+    this.events = events as never
   }
 
   rnd (a: number, b: number) {
