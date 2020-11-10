@@ -19,7 +19,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import firebase from 'firebase/app'
 
-@Component
+@Component({})
 export default class CNavigation extends Vue {
   navItems = [
     { id: 0, path: '/', name: 'Pocetna' },

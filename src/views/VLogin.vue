@@ -27,7 +27,7 @@
 import firebase from 'firebase/app'
 import { Component, Vue } from 'vue-property-decorator'
 
-@Component
+@Component({})
 export default class VLogin extends Vue {
   private form = {
     email: '',
@@ -44,7 +44,6 @@ export default class VLogin extends Vue {
   login (email: string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((res) => {
-        // console.log('res: ', res)
         if (res.user) {
           const user = {
             email: email,
@@ -52,7 +51,6 @@ export default class VLogin extends Vue {
             isAdmin: process.env.VUE_APP_FIREBASE_adminIds.includes(res.user.uid) ? 1 : 0
           }
           console.log('storrrr: ', this.$store)
-          // console.log('user1: ', user, this.$route)
           localStorage.setItem('nox_user', JSON.stringify(user))
           localStorage.setItem('nox_jwt', res.user.refreshToken)
           this.$store.dispatch('setLoggedIn', true)

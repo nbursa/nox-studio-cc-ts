@@ -39,7 +39,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
-@Component
+@Component({})
 export default class VReservations extends Vue {
   private date = new Date()
   private timeStart = new Date()
@@ -47,7 +47,7 @@ export default class VReservations extends Vue {
 
   private dateConfig = {
     type: 'string',
-    mask: 'DD-MM-YYYY' // Uses 'iso' if missing
+    mask: 'DD-MM-YYYY'
   }
 
   private timeConfig = {
@@ -55,10 +55,6 @@ export default class VReservations extends Vue {
     mask: 'HH:mm',
     timeAdjust: '12:00'
   }
-
-  // mounted () {
-  //   console.log('reservations mounted')
-  // }
 }
 </script>
 

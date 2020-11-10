@@ -7,11 +7,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
-@Component
+@Component({})
 export default class VAbout extends Vue {
-  // mounted () {
-  //   console.log('about mounted')
-  // }
 }
 </script>
 
