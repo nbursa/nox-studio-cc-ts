@@ -6,7 +6,8 @@ module.exports = {
   },
 
   extends: [
-    'plugin:vue/essential',
+    'plugin:vue/strongly-recommended',
+    // 'plugin:vue/essential',
     '@vue/standard',
     '@vue/typescript/recommended'
   ],
@@ -30,12 +31,6 @@ module.exports = {
     env: {
       jest: true
     }
-  }],
-
-  'extends': [
-    'plugin:vue/strongly-recommended',
-    '@vue/standard',
-    '@vue/typescript/recommended'
-  ]
+  }]
 
 }

@@ -8,12 +8,11 @@ import firebase from 'firebase/app'
 import 'firebase/analytics'
 import 'firebase/auth'
 import 'firebase/database'
+import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 
 Vue.use(Calendar, { componentPrefix: 'nox' })
-Vue.use(firebase)
-Vue.use(store)
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_apiKey,
@@ -31,5 +30,8 @@ firebase.initializeApp(firebaseConfig)
 new Vue({
   router,
   store,
+  firebase,
+  vuetify,
+  // eslint-disable-next-line
   render: (h: any) => h(App)
 }).$mount('#app')

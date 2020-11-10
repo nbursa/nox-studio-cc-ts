@@ -1,7 +1,7 @@
 module.exports = {
   devServer: {
     overlay: {
-      warnings: false,
+      warnings: true,
       errors: true
     }
   },
@@ -12,5 +12,8 @@ module.exports = {
     manifestOptions: {
       backgroundColor: '#1E1111'
     }
-  }
+  },
+  transpileDependencies: [
+    'vuetify'
+  ]
 }
