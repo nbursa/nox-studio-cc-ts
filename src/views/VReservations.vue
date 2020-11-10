@@ -33,7 +33,7 @@
                   v-list-item(@click="type = '4day'")
                     v-list-item-title 4 days
           v-sheet(height='600')
-            v-calendar(ref='calendar' v-model='focus' color='primary' :events='events' :event-color='getEventColor' :type='type' @click:event.stop='showEvent' @click:more='viewDay' @click:date='viewDay' @change='updateRange')
+            v-calendar(ref='calendar' v-model='focus' color='primary' :events='events' :event-color='getEventColor' :type='type' @click:event='showEvent' @click:more='viewDay' @click:date='viewDay' @change='updateRange')
             v-menu(v-model='selectedOpen' :close-on-content-click='false' :activator='selectedElement' offset-x='')
               v-card(color='grey lighten-4' min-width='350px' flat='')
                 v-toolbar(:color='selectedEvent.color' dark='')
@@ -99,7 +99,8 @@ export default class VReservations extends Vue {
     this.$refs.calendar.next()
   }
 
-  showEvent ({ nativeEvent, event }: { nativeEvent: { target: null }; event: Event}) {
+  // eslint-disable-next-line
+  showEvent ({ nativeEvent, event }: { nativeEvent: any; event: any}) {
     console.log('show event: ', nativeEvent, event)
     const open = () => {
       this.selectedEvent = event
@@ -116,7 +117,7 @@ export default class VReservations extends Vue {
       open()
     }
 
-    (nativeEvent as Event).stopPropagation()
+    nativeEvent.stopPropagation()
   }
 
   updateRange ({ start, end }: { start: { date: Date }; end: { date: Date } }) {
@@ -149,36 +150,6 @@ export default class VReservations extends Vue {
   rnd (a: number, b: number) {
     return Math.floor((b - a + 1) * Math.random()) + a
   }
-
-  // private today = new Date()
-  // private timeStart = new Date()
-  // private timeEnd = new Date()
-
-  // private dateConfig = {
-  //   type: 'string',
-  //   mask: 'DD-MM-YYYY'
-  // }
-
-  // private timeConfig = {
-  //   type: 'string',
-  //   mask: 'HH:mm',
-  //   timeAdjust: '12:00'
-  // }
-
-  // tracked = {
-  //   '2019-01-09': [23, 45, 10],
-  //   '2019-01-08': [10],
-  //   '2019-01-07': [0, 78, 5],
-  //   '2019-01-06': [0, 0, 50],
-  //   '2019-01-05': [0, 10, 23],
-  //   '2019-01-04': [2, 90],
-  //   '2019-01-03': [10, 32],
-  //   '2019-01-02': [80, 10, 10],
-  //   '2019-01-01': [20, 25, 10]
-  // }
-
-  // colors = ['#1867c0', '#fb8c00', '#000000']
-  // category = ['Development', 'Meetings', 'Slacking']
 }
 </script>
 
