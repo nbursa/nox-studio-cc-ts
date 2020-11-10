@@ -50,7 +50,6 @@ export default class VLogin extends Vue {
             uid: res.user.uid,
             isAdmin: process.env.VUE_APP_FIREBASE_adminIds.includes(res.user.uid) ? 1 : 0
           }
-          console.log('storrrr: ', this.$store)
           localStorage.setItem('nox_user', JSON.stringify(user))
           localStorage.setItem('nox_jwt', res.user.refreshToken)
           this.$store.dispatch('setLoggedIn', true)
