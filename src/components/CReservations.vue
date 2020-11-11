@@ -1,63 +1,42 @@
 <template lang="pug">
-  .reservations
+  .reservations-sidebar
     h1.page-title REZERVACIJE
-    //- template
-    v-row.fill-height
-      v-col
-    v-sheet(height='64')
-      v-toolbar(flat='')
-        v-btn.mr-4(outlined='' color='grey darken-2' @click='setToday')
-          | Today
-        v-btn(fab='' text='' small='' color='grey darken-2' @click='prev')
-          v-icon(small='')
-            | mdi-chevron-left
-        v-btn(fab='' text='' small='' color='grey darken-2' @click='next')
-          v-icon(small='')
-            | mdi-chevron-right
-        v-toolbar-title(v-if='$refs.calendar')
-          | {{ $refs.calendar.title }}
-        v-spacer
-        v-menu(bottom='' right='')
-          template(v-slot:activator='{ on, attrs }')
-            v-btn(outlined='' color='grey darken-2' v-bind='attrs' v-on='on')
-              span {{ typeToLabel[type] }}
-              v-icon(right='')
-                | mdi-menu-down
-          v-list
-            v-list-item(@click="type = 'day'")
-              v-list-item-title Day
-            v-list-item(@click="type = 'week'")
-              v-list-item-title Week
-            v-list-item(@click="type = 'month'")
-              v-list-item-title Month
-            v-list-item(@click="type = '4day'")
-              v-list-item-title 4 days
-    v-sheet(height='600')
-      v-calendar(ref='calendar' v-model='focus' color='primary' :events='events' :event-color='getEventColor' :type='type' @click:event='showEvent' @click:more='viewDay' @click:date='viewDay' @change='updateRange')
-      v-menu(v-model='selectedOpen' :close-on-content-click='false' :activator='selectedElement' offset-x='')
-        v-card(color='grey lighten-4' min-width='350px' flat='')
-          v-toolbar(:color='selectedEvent.color' dark='')
-            v-btn(icon='')
-              v-icon mdi-pencil
-            v-toolbar-title(v-html='selectedEvent.name')
-            v-spacer
-            v-btn(icon='')
-              v-icon mdi-heart
-            v-btn(icon='')
-              v-icon mdi-dots-vertical
-          v-card-text
-            span(v-html='selectedEvent.details')
-          v-card-actions
-            v-btn(text='' color='secondary' @click='selectedOpen = false')
-              | Cancel
+    h2 Datum
+    v-date-picker(
+      v-model="date"
+      color="gray"
+      mode="date"
+    )
+    h2 Pocetak
+    v-time-picker(
+      v-model="startTime"
+      format="24h"
+      mode="time"
+    )
+    h2 Kraj
+    v-time-picker(
+      v-model="endTime"
+      format="24h"
+      mode="time"
+    )
+    v-btn() Submit
 
 </template>
 
 <script lang="ts">
+// import VDatePicker from 'v-calendar/lib/components/date-picker.umd'
 import { Component, Vue } from 'vue-property-decorator'
 
-@Component({})
+@Component({
+  components: {
+    // VDatePicker
+  }
+})
 export default class VReservations extends Vue {
+  private date = new Date().toISOString().substr(0, 10)
+  private startTime = new Date()
+  private endTime = new Date()
+
   private focus = ''
   private type = 'month'
   private typeToLabel = {
@@ -154,22 +133,21 @@ export default class VReservations extends Vue {
 </script>
 
 <style lang="stylus">
-  .reservations
+  .reservations-sidebar
     position absolute
     top 0
-    right 0px
-    width 300px
-    height 100%
+    right 0
+    width 340px
+    max-height 100vh
     background-color #1e1e1e
-    transition right .25s ease-in-out
     transition transform .25s ease-in-out
     border-left 5px solid #121212
     padding 20px
-    transform translateX(300px)
-    overflow hidden
-    // text-align initial
+    transform translateX(380px)
     box-sizing content-box
     z-index 2
+    overflow hidden
+    overflow-y auto
     &:hover
       transform translateX(0)
       right 0
@@ -177,31 +155,35 @@ export default class VReservations extends Vue {
     .page-title
       font-weight bold
       margin-bottom 20px
-    .date-pickers
-      h2
-        margin 10px
-    .time-pickers
-      display flex
-      .time-start-picker
-        margin-right 20px
-      .time-start-picker,
-      .time-end-picker
-        flex 1
-        h2
-          margin 10px
-        .vc-container
-          width 100%
-        .vc-time-picker
-          .vc-time-icon
-            display none
-          .vc-date-time
-            width 100%
-            .vc-date
-              display none
-            .vc-time
-              .vc-select
-                width 50%
-                select
-                  width 100%
-
+    .v-picker
+      &--date
+        padding 0
+        margin-bottom 20px
+        .v-date-picker-title
+          &__date
+            font-size 30px
+        .v-picker__body
+          width 100% !important
+          .v-date-picker-table
+            .v-btn
+              font-size 1.2rem
+              height 38px
+      &--time
+        margin-bottom 20px
+        .v-picker__body
+          width 100% !important
+          background none
+        .v-picker__title
+          padding 0
+          .v-time-picker-title
+            justify-content center
+            padding 0
+            .v-picker__title__btn
+              font-size 2rem
+            span
+              font-size 2rem
+        .v-picker__body
+          // as
+    .v-btn
+      margin-bottom 50px
 </style>

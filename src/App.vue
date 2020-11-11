@@ -1,7 +1,8 @@
 <template lang="pug">
-  v-app
+  v-app.app
     v-main
-      CNavigation
+      c-navigation
+      c-reservations
       .router-view
         router-view
 
@@ -9,12 +10,14 @@
 
 <script lang="ts">
 import CNavigation from '@/components/CNavigation.vue'
+import CReservations from '@/components/CReservations.vue'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   name: 'App',
   components: {
-    CNavigation
+    CNavigation,
+    CReservations
   }
 })
 export default class App extends Vue {
@@ -23,5 +26,7 @@ export default class App extends Vue {
 
 <style lang="stylus">
 .router-view
-  padding-left 76px !important
+  .app
+    max-height 100vh
+    overflow-y auto
 </style>

@@ -1,23 +1,18 @@
 <template lang="pug">
   .login
-    v-container
-      v-row
-        v-spacer
-        v-col(xs="12", sm="12", md="6", lg="4")
-          h1 LOGIN
-          validation-observer(ref='observer' v-slot='{ invalid }')
-            form(@submit.prevent='submit')
-              validation-provider(v-slot='{ errors }' name='email' rules='required|email')
-                v-text-field(v-model='email' :error-messages='errors' label='Email' required='')
-              validation-provider(v-slot='{ errors }' name='password' rules='required|min:6')
-                v-text-field(v-model='password' :error-messages='errors' label='Password' required='')
-              v-btn.mr-4(type='submit' :disabled='invalid')
-                | submit
-              v-btn(@click='clear')
-                | clear
+    h1 LOGIN
+    validation-observer(ref='observer' v-slot='{ invalid }')
+      form.form(@submit.prevent='submit')
+        validation-provider(v-slot='{ errors }' name='email' rules='required|email')
+          v-text-field(v-model='email' :error-messages='errors' label='Email' required='')
+        validation-provider(v-slot='{ errors }' name='password' rules='required|min:6')
+          v-text-field(v-model='password' :error-messages='errors' label='Password' required='')
+        v-btn.mr-4(type='submit' :disabled='invalid')
+          | submit
+        v-btn(@click='clear')
+          | clear
 
-          .errors(v-if="loginErrorMessage") {{ loginErrorMessage }}
-        v-spacer
+    .errors(v-if="loginErrorMessage") {{ loginErrorMessage }}
 
 </template>
 
@@ -99,5 +94,8 @@ export default class VLogin extends Vue {
 <style lang="stylus">
   .login
     padding 20px
+    .form
+      max-width 400px
+      margin 0 auto
 
 </style>
