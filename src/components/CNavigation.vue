@@ -1,20 +1,27 @@
 <template lang="pug">
-  v-app-bar.navigation(
-    app,
-    color="primary",
-    dark
-  )
-    .d-flex.align-center.navigation-logo
-      v-btn(to="/")
-        h1 NOX UNDERGROUND STUDIO
-
-    v-spacer
-
-    .navigation-menu
-      v-btn.navigation-menu_link(v-if="navToggle || !smallScreen" v-for="item in navItems" :key="item.id" :to="item.path" @click.native="toggleNav") {{ item.name }}
-      v-btn.navigation-menu_link(v-if="isAdmin" to="/admin") ADMIN
-      v-btn.navigation-menu_link(v-if="!isLoggedIn" to="/login") LOGIN
-      v-btn.navigation-menu_link(v-if="isLoggedIn" @click.native="logOut" to="") LOGOUT
+  v-navigation-drawer.navigation(permanent, expand-on-hover)
+    v-list
+      //- v-list-item.px-2
+      //-   v-list-item-avatar
+      //-   h1 NOX studio
+      v-list-item(link)
+        v-list-item-content
+          v-list-item-title.title
+            router-link.logo(to="/")
+              h1 NOX UNDERGROUND STUDIO
+              br
+              v-list-item-subtitle
+                a.logo(href="mailto:nox_studio@noxstudio.com") nox_studio@noxstudio.com
+    v-divider
+    v-list(nav, dense)
+      v-list-item(link, v-for="item in navItems" :key="item.id" )
+        router-link.navigation-menu_link(:to="item.path" @click.native="toggleNav") {{ item.name }}
+      v-list-item(link, v-if="isAdmin")
+        router-link.navigation-menu_link(to="/admin") ADMIN
+      v-list-item(link, v-if="!isLoggedIn")
+        router-link.navigation-menu_link(to="/login") LOGIN
+      v-list-item(link, v-if="isLoggedIn")
+        router-link.navigation-menu_link(to="" @click.native="logOut") LOGOUT
 
 </template>
 
@@ -27,9 +34,9 @@ export default class CNavigation extends Vue {
   navItems = [
     { id: 0, path: '/about', name: 'O Nama' },
     { id: 1, path: '/reservations', name: 'Rezervacije' },
-    { id: 2, path: '/dashboard', name: 'Dashboard' },
-    { id: 3, path: '/music', name: 'Music' },
-    { id: 4, path: '/galerija', name: 'Galerija' }
+    { id: 2, path: '/music', name: 'Music' },
+    { id: 3, path: '/galerija', name: 'Galerija' },
+    { id: 4, path: '/dashboard', name: 'Dashboard' }
   ]
 
   navToggle = false
@@ -61,4 +68,23 @@ export default class CNavigation extends Vue {
 </script>
 
 <style scoped lang="stylus">
+.v-navigation-drawer.navigation
+  position absolute
+  background-color #1e1e1e
+    >>> .logo
+      color #ffffff !important
+  //     text-decoration none
+  //     transition color .25s ease-in-out
+  //     &:hover
+  //       color darken(#ffffff, 25%)
+  //   &-menu
+  //     &_link
+  //       color #ffffff
+  //       padding .5rem
+  //       text-transform uppercase
+  //       text-decoration none
+  //       transition color .25s ease-in-out
+  //       &:hover
+  //         color darken(#ffffff, 25%)
+
 </style>
