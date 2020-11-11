@@ -1,20 +1,20 @@
 <template lang="pug">
-  .navigation
-    v-app-bar(
-      app,
-      color="primary",
-      dark
-    )
-      .d-flex.align-center
-        router-link(to="/")
-          h1 NOX UNDERGROUND STUDIO
+  v-app-bar.navigation(
+    app,
+    color="primary",
+    dark
+  )
+    .d-flex.align-center.navigation-logo
+      v-btn(to="/")
+        h1 NOX UNDERGROUND STUDIO
 
-      v-spacer
+    v-spacer
 
-      router-link(v-if="navToggle || !smallScreen" v-for="item in navItems" :key="item.id" :to="item.path" @click.native="toggleNav") {{ item.name }}
-      router-link(v-if="isAdmin" to="/admin") ADMIN
-      router-link(v-if="!isLoggedIn" to="/login") LOGIN
-      router-link(v-if="isLoggedIn" @click.native="logOut" to="") LOGOUT
+    .navigation-menu
+      v-btn.navigation-menu_link(v-if="navToggle || !smallScreen" v-for="item in navItems" :key="item.id" :to="item.path" @click.native="toggleNav") {{ item.name }}
+      v-btn.navigation-menu_link(v-if="isAdmin" to="/admin") ADMIN
+      v-btn.navigation-menu_link(v-if="!isLoggedIn" to="/login") LOGIN
+      v-btn.navigation-menu_link(v-if="isLoggedIn" @click.native="logOut" to="") LOGOUT
 
 </template>
 
@@ -27,7 +27,9 @@ export default class CNavigation extends Vue {
   navItems = [
     { id: 0, path: '/about', name: 'O Nama' },
     { id: 1, path: '/reservations', name: 'Rezervacije' },
-    { id: 2, path: '/dashboard', name: 'Dashboard' }
+    { id: 2, path: '/dashboard', name: 'Dashboard' },
+    { id: 3, path: '/music', name: 'Music' },
+    { id: 4, path: '/galerija', name: 'Galerija' }
   ]
 
   navToggle = false
@@ -59,15 +61,4 @@ export default class CNavigation extends Vue {
 </script>
 
 <style scoped lang="stylus">
-.navigation
-  transition all .25s ease-in-out
-  a
-    color #ffffff
-    padding 10px
-    text-transform uppercase
-    text-decoration none
-    transition color, font-size .25s ease-in-out
-    &:hover
-      color darken(#ffffff, 10%)
-
 </style>
