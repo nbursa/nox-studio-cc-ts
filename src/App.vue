@@ -1,8 +1,9 @@
 <template lang="pug">
   v-app
-    CNavigation
     v-main
-      router-view
+      CNavigation
+      .router-view
+        router-view
 
 </template>
 
@@ -19,3 +20,8 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class App extends Vue {
 }
 </script>
+
+<style lang="stylus">
+.router-view
+  padding-left 76px !important
+</style>
