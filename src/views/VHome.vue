@@ -15,5 +15,7 @@ export default class VHome extends Vue {
 <style lang="stylus">
   .home
     padding 20px
-    text-align initial
+    h1
+      text-align center
+      margin-bottom 20px
 </style>

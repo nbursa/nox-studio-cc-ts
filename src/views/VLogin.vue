@@ -77,7 +77,7 @@ export default class VLogin extends Vue {
             this.$store.dispatch('setIsAdmin', true)
             return this.$router.push({ path: '/admin' })
           }
-          this.$router.push({ path: '/dashboard' })
+          this.$router.push({ path: '/admin' })
         }
       })
       .catch((error) => {
@@ -94,6 +94,9 @@ export default class VLogin extends Vue {
 <style lang="stylus">
   .login
     padding 20px
+    h1
+      text-align center
+      margin-bottom 20px
     .form
       max-width 400px
       margin 0 auto

@@ -26,8 +26,7 @@ export default class CNavigation extends Vue {
   navItems = [
     { id: 0, path: '/about', name: 'O Nama' },
     { id: 1, path: '/music', name: 'Muzika' },
-    { id: 2, path: '/galerija', name: 'Galerija' },
-    { id: 3, path: '/dashboard', name: 'Dashboard' }
+    { id: 2, path: '/galerija', name: 'Galerija' }
   ]
 
   navToggle = false
@@ -83,21 +82,22 @@ export default class CNavigation extends Vue {
     cursor pointer
     background-color #1e1e1e
     border-radius 0 15px 15px 0
+    text-transform uppercase
   nav
     display flex
     flex-direction column
     padding 20px
     .top
       padding 0 0 20px
+      .mail
+        color #ffffff
+        &:hover
+          color darken(#ffffff, 40%)
       .logo
         color #ffffff
         text-decoration none
         h1
           margin-bottom 20px
-      .mail
-        text-transform none
-        font-size .75rem
-        line-height .75rem
     .list
       display flex
       flex-direction column

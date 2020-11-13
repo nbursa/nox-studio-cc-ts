@@ -15,5 +15,6 @@ export default class VAbout extends Vue {
 <style lang="stylus">
   .about
     padding 20px
-    text-align initial
+    h1
+      text-align center
 </style>

@@ -1,17 +1,19 @@
 <template lang="pug">
   .home
     h1 MUZIKA
+    div(v-for="item in files" :key="item.id") {{ item }}
 
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-// import { mapState } from 'vuex'
 
 @Component({})
 export default class VMusic extends Vue {
+  files = {}
   mounted () {
-    console.log('state: ', this.$store.state)
+    console.log('state: ', this.$store.state.files.audio)
+    this.files = this.$store.state.files.audio
   }
 }
 </script>
@@ -19,5 +21,6 @@ export default class VMusic extends Vue {
 <style lang="stylus">
   .home
     padding 20px
-    text-align initial
+    h1
+      text-align center
 </style>

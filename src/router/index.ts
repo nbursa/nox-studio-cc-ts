@@ -71,7 +71,7 @@ router.beforeEach((to, from, next) => {
         if (user.isAdmin === 1) {
           next()
         } else {
-          next({ name: 'Dashboard' })
+          next({ name: 'Admin' })
         }
       } else {
         next()
@@ -81,7 +81,7 @@ router.beforeEach((to, from, next) => {
     if (localStorage.getItem('nox_jwt') === null) {
       next()
     } else {
-      next({ name: 'Dashboard' })
+      next({ name: 'Admin' })
     }
   } else {
     next()
