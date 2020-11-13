@@ -1,8 +1,12 @@
 <template lang="pug">
   .reservations-sidebar
-    .flag Rezervacije
+    .flag Rezervisi termin
     .reservations
-      h1.page-title REZERVACIJE
+      h1.page-title REZERVACIJA
+      h2 Ime
+        v-text-field(label="Ime", required)
+      h2 Kontakt telefon
+        v-text-field(label="Ime", required)
       h2 Datum
       v-date-picker(
         v-model="date"
@@ -21,7 +25,8 @@
         format="24hr"
         mode="time"
       )
-      v-btn() Submit
+      v-spacer
+      v-btn(width="100%" rounded) Rezervisi
 
 </template>
 

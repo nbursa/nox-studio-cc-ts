@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
 import '@/style/index.styl'
-import { en } from 'vuetify/src/locale'
+import { sr, en } from '@/lang'
 import { VuetifyPreset } from 'vuetify/types/services/presets'
 
 export const preset: VuetifyPreset = {
@@ -20,8 +20,8 @@ export const preset: VuetifyPreset = {
     values: {}
   },
   lang: {
-    current: 'en',
-    locales: { en },
+    current: 'sr',
+    locales: { en, sr },
     // eslint-disable-next-line
     t: undefined as any
   },

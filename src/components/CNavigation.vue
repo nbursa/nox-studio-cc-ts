@@ -3,6 +3,7 @@
     .flag Meni
     nav
       .top
+        v-btn.lang(@click="changeLang" small rounded) {{ locale }}
         router-link.logo(to="/")
           h1 NOX UNDERGROUND STUDIO
         a.mail(@click="toggleContact")
@@ -31,6 +32,8 @@ export default class CNavigation extends Vue {
 
   navToggle = false
 
+  get locale () { return this.$vuetify.lang.current }
+
   get isLoggedIn () { return this.$store.state.isLoggedIn }
 
   get isAdmin () { return this.$store.state.isAdmin }
@@ -57,6 +60,12 @@ export default class CNavigation extends Vue {
 
   toggleContact () {
     this.$store.dispatch('toggleModal', 'contact')
+  }
+
+  changeLang () {
+    this.$vuetify.lang.current === 'en'
+      ? this.$vuetify.lang.current = 'sr'
+      : this.$vuetify.lang.current = 'en'
   }
 }
 </script>
@@ -104,6 +113,9 @@ export default class CNavigation extends Vue {
         text-decoration none
         h1
           margin-bottom 20px
+      .lang
+        margin-bottom 20px
+        border 1px solid #ffffff
     .list
       display flex
       flex-direction column
