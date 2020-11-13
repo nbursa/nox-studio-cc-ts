@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import firebase from 'firebase/app'
 
 Vue.use(Vuex)
 
@@ -28,7 +29,21 @@ export default new Vuex.Store({
     },
     toggleModal (state, payload) {
       state.modals[payload] = !state.modals[payload]
-      console.log('mut contact modal: ', state.modals[payload])
+      // console.log('mut contact modal: ', state.modals[payload])
+    },
+    fetchFiles (state, payload) {
+      firebase.database().ref(payload).on('value', (snapshot) => {
+        state.files[payload] = []
+        Object.values(snapshot.val()).forEach((item, i) => {
+          const id = Object.keys(snapshot.val())[i]
+          const fileItem = {
+            id,
+            name: item.name,
+            url: item.url
+          }
+          state.files[payload].push(fileItem)
+        })
+      })
     }
   },
   actions: {
@@ -48,6 +63,9 @@ export default new Vuex.Store({
     },
     toggleModal (store, payload) {
       store.commit('toggleModal', payload)
+    },
+    fetchData (store, payload) {
+      store.commit('fetchFiles', payload)
     }
   },
   getters: {},
