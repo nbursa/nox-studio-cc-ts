@@ -3,6 +3,7 @@
     v-main
       c-navigation
       c-reservations
+      contact-modal(v-if="contactModal")
       .router-view
         router-view
 
@@ -11,16 +12,19 @@
 <script lang="ts">
 import CNavigation from '@/components/CNavigation.vue'
 import CReservations from '@/components/CReservations.vue'
+import ContactModal from '@/components/modals/CContactModal.vue'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   name: 'App',
   components: {
     CNavigation,
-    CReservations
+    CReservations,
+    ContactModal
   }
 })
 export default class App extends Vue {
+  contactModal = true
 }
 </script>
 

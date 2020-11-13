@@ -11,6 +11,9 @@ export default new Vuex.Store({
       audio: [],
       video: [],
       photo: []
+    },
+    modals: {
+      contact: false
     }
   },
   mutations: {
@@ -22,6 +25,10 @@ export default new Vuex.Store({
     },
     saveFile (state, payload) {
       state.files[payload.type].push(payload.file)
+    },
+    toggleModal (state, payload) {
+      state.modals[payload] = !state.modals[payload]
+      console.log('mut contact modal: ', state.modals[payload])
     }
   },
   actions: {
@@ -38,6 +45,9 @@ export default new Vuex.Store({
         type, file
       }
       store.commit('saveFile', formated)
+    },
+    toggleModal (store, payload) {
+      store.commit('toggleModal', payload)
     }
   },
   getters: {},

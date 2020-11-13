@@ -2,13 +2,16 @@
 .admin
   .admin-header
     h1 ADMIN PANEL
-    v-btn(@click="logOut") Logout
+    v-btn.logout(rounded @click="logOut")
+      v-icon(medium color='gray darken-2')
+        | mdi-power
+
   v-card.upload
     h2 Upload files
     form(enctype='multipart/form-data' novalidate v-if='isInitial || isSaving || isSuccess')
       v-select.select(v-model="uploadName" :items='uploadItems' label='Choose upload type' outlined)
       .dropbox
-        input.input-file(type='file' multiple :name='uploadName' :disabled='isSaving' @change='filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length' :accept='uploadAccept || null')
+        input.input-file(type='file' multiple :name='uploadName' :disabled='isSaving' @change='filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length' :accept='uploadAccept')
         p(v-if='isInitial || isSuccess')
           | Drag your file(s) here to begin
           br
@@ -81,11 +84,6 @@ export default class VAdmin extends Vue {
       })
   }
 
-  // upload (form: FormData) {
-  //   console.log('upload: ', form)
-  //   this.store.dispatch('saveFile', form)
-  // }
-
   filesChange (fieldName: string, fileList: File[]) {
     if (!fileList.length) return
     Array
@@ -123,6 +121,8 @@ export default class VAdmin extends Vue {
   h1
     text-align center
     margin-right 20px
+  .logout
+    padding 0 !important
   .upload
     max-width 400px
     padding 20px

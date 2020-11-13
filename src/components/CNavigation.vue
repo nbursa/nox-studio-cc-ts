@@ -5,7 +5,7 @@
       .top
         router-link.logo(to="/")
           h1 NOX UNDERGROUND STUDIO
-        a.mail(href="mailto:nox_studio@noxstudio.com")
+        a.mail(@click="toggleContact")
           span nox_studio
           br
           span @noxstudio.com
@@ -54,6 +54,10 @@ export default class CNavigation extends Vue {
   toggleNav () {
     this.navToggle = !this.navToggle
   }
+
+  toggleContact () {
+    this.$store.dispatch('toggleModal', 'contact')
+  }
 }
 </script>
 
@@ -91,7 +95,9 @@ export default class CNavigation extends Vue {
       padding 0 0 20px
       .mail
         color #ffffff
+        transition text-decoration, color .25s ease-in-out
         &:hover
+          text-decoration underline
           color darken(#ffffff, 40%)
       .logo
         color #ffffff
@@ -108,6 +114,7 @@ export default class CNavigation extends Vue {
         text-decoration none
         color #ffffff
         margin 10px 0
+        transition color .25s ease-in-out
         &:hover
           color darken(#ffffff, 40%)
 
