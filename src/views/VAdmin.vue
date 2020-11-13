@@ -9,10 +9,10 @@
   v-card.upload
     h2 Upload files
     form(enctype='multipart/form-data' novalidate v-if='isInitial || isSaving || isSuccess')
-      v-select.select(v-model="uploadName" :items='uploadItems' label='Choose upload type' outlined)
+      v-select.select(v-model="uploadName" :items='uploadItems' label='Sacuvaj fajl(ove) u folder:' outlined)
       .dropbox
         input.input-file(type='file' multiple :name='uploadName' :disabled='isSaving' @change='filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length' :accept='uploadAccept')
-        p(v-if='isInitial || isSuccess')
+        p(v-if='isInitial')
           | Drag your file(s) here to begin
           br
           |  or click to browse
@@ -21,6 +21,10 @@
         p(v-if="isFailed")
           v-btn(@click="reset") check and try again
           | {{ uploadError }}
+        p(v-if="isSuccess")
+          | File(s) uploaded succesfully!
+          br
+          | Click or drag file(s) to upload again
 
 </template>
 
@@ -73,15 +77,32 @@ export default class VAdmin extends Vue {
   save (formData: FormData) {
     this.currentStatus = Status.STATUS_SAVING
     console.log('save: ', ...formData)
-    this.$store.dispatch('saveFile', ...formData)
-      .then((res: ConcatArray<never>) => {
-        this.uploadedFiles = [].concat(res)
-        this.currentStatus = Status.STATUS_SUCCESS
+    this.upload(formData)
+  }
+
+  upload (formData: FormData) {
+    try {
+      this.uploadData(formData)
+    } catch (e) {
+      this.uploadError = e.response
+      this.currentStatus = Status.STATUS_FAILED
+    } finally {
+      this.currentStatus = Status.STATUS_SUCCESS
+    }
+  }
+
+  uploadData (formData: FormData) {
+    const storageRef = firebase.storage().ref()
+    try {
+      formData.forEach((formItem, type) => {
+        console.log('formItem: ', type)
+        const fileRef = storageRef.child(type.toLowerCase() + '/' + formItem.name)
+        fileRef.put(formItem)
       })
-      .catch((err: { response: string }) => {
-        this.uploadError = err.response
-        this.currentStatus = Status.STATUS_FAILED
-      })
+    } catch (e) {
+      this.uploadError = e
+      this.currentStatus = Status.STATUS_FAILED
+    }
   }
 
   filesChange (fieldName: string, fileList: File[]) {
