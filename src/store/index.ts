@@ -6,7 +6,12 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLoggedIn: false,
-    isAdmin: false
+    isAdmin: false,
+    files: {
+      audio: [],
+      video: [],
+      photo: []
+    }
   },
   mutations: {
     setLoggedIn (state, payload) {
@@ -14,6 +19,9 @@ export default new Vuex.Store({
     },
     setIsAdmin (state, payload) {
       state.isAdmin = payload
+    },
+    saveFile (state, payload) {
+      state.files[payload.type].push(payload.file)
     }
   },
   actions: {
@@ -22,8 +30,16 @@ export default new Vuex.Store({
     },
     setIsAdmin (store, payload) {
       store.commit('setIsAdmin', payload)
+    },
+    saveFile (store, payload) {
+      const type: string = payload[0].toLowerCase()
+      const file: File = payload[1]
+      const formated = {
+        type, file
+      }
+      store.commit('saveFile', formated)
     }
   },
-  modules: {
-  }
+  getters: {},
+  modules: {}
 })

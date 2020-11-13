@@ -1,5 +1,6 @@
 <template lang="pug">
   .navigation
+    .flag Meni
     nav
       .top
         router-link.logo(to="/")
@@ -24,10 +25,9 @@ import firebase from 'firebase/app'
 export default class CNavigation extends Vue {
   navItems = [
     { id: 0, path: '/about', name: 'O Nama' },
-    // { id: 1, path: '/reservations', name: 'Rezervacije' },
-    { id: 2, path: '/music', name: 'Music' },
-    { id: 3, path: '/galerija', name: 'Galerija' },
-    { id: 4, path: '/dashboard', name: 'Dashboard' }
+    { id: 1, path: '/music', name: 'Muzika' },
+    { id: 2, path: '/galerija', name: 'Galerija' },
+    { id: 3, path: '/dashboard', name: 'Dashboard' }
   ]
 
   navToggle = false
@@ -60,20 +60,29 @@ export default class CNavigation extends Vue {
 
 <style scoped lang="stylus">
 .navigation
-  position absolute
+  position fixed
   top 0
   left -200px
   width 200px
-  height 100%
+  height 100vh
   background-color #1e1e1e
   transition left .25s ease-in-out
   border-right 5px solid #121212
-  // border-right 5px solid white
   box-sizing content-box
   z-index 2
   &:hover
     left 0
     border-right 5px solid transparent
+  .flag
+    display block
+    position absolute
+    top 10px
+    left 200px
+    z-index 300
+    padding 10px 20px
+    cursor pointer
+    background-color #1e1e1e
+    border-radius 0 15px 15px 0
   nav
     display flex
     flex-direction column
@@ -83,6 +92,8 @@ export default class CNavigation extends Vue {
       .logo
         color #ffffff
         text-decoration none
+        h1
+          margin-bottom 20px
       .mail
         text-transform none
         font-size .75rem
@@ -96,6 +107,7 @@ export default class CNavigation extends Vue {
         text-transform uppercase
         text-decoration none
         color #ffffff
+        margin 10px 0
         &:hover
           color darken(#ffffff, 40%)
 

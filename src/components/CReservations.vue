@@ -1,25 +1,27 @@
 <template lang="pug">
   .reservations-sidebar
-    h1.page-title REZERVACIJE
-    h2 Datum
-    v-date-picker(
-      v-model="date"
-      color="gray"
-      mode="date"
-    )
-    h2 Pocetak
-    v-time-picker(
-      v-model="startTime"
-      format="24h"
-      mode="time"
-    )
-    h2 Kraj
-    v-time-picker(
-      v-model="endTime"
-      format="24h"
-      mode="time"
-    )
-    v-btn() Submit
+    .flag Rezervacije
+    .reservations
+      h1.page-title REZERVACIJE
+      h2 Datum
+      v-date-picker(
+        v-model="date"
+        color="gray"
+        mode="date"
+      )
+      h2 Pocetak
+      v-time-picker(
+        v-model="startTime"
+        format="24hr"
+        mode="time"
+      )
+      h2 Kraj
+      v-time-picker(
+        v-model="endTime"
+        format="24hr"
+        mode="time"
+      )
+      v-btn() Submit
 
 </template>
 
@@ -129,27 +131,40 @@ export default class VReservations extends Vue {
 
 <style lang="stylus">
   .reservations-sidebar
-    position absolute
+    position fixed
     top 0
     right 0
-    width 340px
-    max-height 100vh
+    height 100vh
     background-color #1e1e1e
     transition transform .25s ease-in-out
     border-left 5px solid #121212
-    padding 20px
     transform translateX(380px)
     box-sizing content-box
     z-index 2
-    overflow hidden
-    overflow-y auto
     &:hover
       transform translateX(0)
       right 0
       border-left 5px solid transparent
+    .reservations
+      max-height 100vh
+      overflow-x hidden
+      overflow-y auto
+      padding 20px
+      width 340px
+    .flag
+      display block
+      position absolute
+      top 10px
+      right 380px
+      z-index 300
+      padding 10px 20px
+      cursor pointer
+      background-color #1e1e1e
+      border-radius 15px 0 0 15px
     .page-title
       font-weight bold
       margin-bottom 20px
+      position relative
     .v-picker
       &--date
         padding 0
@@ -178,8 +193,6 @@ export default class VReservations extends Vue {
               font-size 2rem
             span
               font-size 2rem
-        .v-picker__body
-          // as
     .v-btn
       margin-bottom 50px
 </style>

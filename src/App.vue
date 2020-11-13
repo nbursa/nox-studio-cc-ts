@@ -25,8 +25,8 @@ export default class App extends Vue {
 </script>
 
 <style lang="stylus">
-.router-view
-  .app
-    max-height 100vh
-    overflow-y auto
+.app
+  max-height 100vh
+  overflow hidden
+  overflow-y auto
 </style>

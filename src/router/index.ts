@@ -33,9 +33,14 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/VAbout.vue')
   },
   {
-    path: '/reservations',
-    name: 'Reservations',
-    component: () => import('../views/VReservations.vue')
+    path: '/music',
+    name: 'Music',
+    component: () => import('../views/VMusic.vue')
+  },
+  {
+    path: '/galerija',
+    name: 'Galery',
+    component: () => import('../views/VGalery.vue')
   },
   {
     path: '/dashboard',
