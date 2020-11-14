@@ -88,7 +88,7 @@ export default class VMusic extends Vue {
           display flex
           width 100%
           overflow-x auto
-          &::-webkit-scrollbar
+          // &::-webkit-scrollbar
             // display none
           .video-card
             display inline-flex
@@ -96,6 +96,7 @@ export default class VMusic extends Vue {
             width 400px
             height 225px
             margin-right 20px
+            cursor pointer
             &:hover
               .title
                 opacity 1
@@ -122,8 +123,6 @@ export default class VMusic extends Vue {
             display inline-flex
             flex-direction column
             position relative
-            // width 400px
-            // height 225px
             margin-right 20px
             overflow hidden
             word-break break-all

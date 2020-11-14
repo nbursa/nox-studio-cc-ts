@@ -41,7 +41,8 @@ export default new Vuex.Store({
             name: item.name,
             url: item.url
           }
-          state.files[payload].push(fileItem)
+          const dest = payload === 'image' ? 'photo' : payload
+          state.files[dest].push(fileItem)
         })
       })
     }
